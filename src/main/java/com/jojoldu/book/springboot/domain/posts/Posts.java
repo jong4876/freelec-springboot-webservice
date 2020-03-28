@@ -31,4 +31,10 @@ public class Posts {
         this.content = content;
         this.author = author;
     }
+
+    // Dirty Checking : 트렌젝션이 끝나는 시점에 테이블의 변경분을 반영-> Update 쿼리문 날릴필요없음
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }
