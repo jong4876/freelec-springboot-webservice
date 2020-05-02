@@ -3,13 +3,17 @@ package com.jojoldu.book.springboot.service.posts;
 
 import com.jojoldu.book.springboot.domain.posts.Posts;
 import com.jojoldu.book.springboot.domain.posts.PostsRepository;
+import com.jojoldu.book.springboot.web.dto.PostsListResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsResponseDto;
 import com.jojoldu.book.springboot.web.dto.PostsSaveRequestDto;
 import com.jojoldu.book.springboot.web.dto.PostsUpdateRequestDto;
+import com.samskivert.mustache.Mustache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 // 인자를 변경해도 생성자 건들필요 없음
 @RequiredArgsConstructor
@@ -37,5 +41,11 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
-
+    // readOnly 시엔 아예 transactional 테그 안달기?
+    @Transactional
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
