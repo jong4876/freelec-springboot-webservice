@@ -22,7 +22,6 @@ public class Posts extends BaseTimeEntity {
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private  String content;
-
     private String author;
 
     // builder 클래스- 어느 필드에 어떤값을 채워야할지 명확히 인지
