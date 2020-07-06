@@ -33,6 +33,14 @@ public class PostsService {
         return id;
     }
 
+    @Transactional
+    public void delete(Long id){
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
+
+        postsRepository.delete(posts);
+    }
+
     //jpa(postsRepository) 에서 id 기준으로 게시글을 찾기위해 넘겨줌
     public PostsResponseDto findById(Long id){
         Posts entity = postsRepository.findById(id)
@@ -43,7 +51,7 @@ public class PostsService {
 
     // readOnly 시엔 아예 transactional 테그 안달기?
     @Transactional
-    public List<PostsListResponseDto> findAllDesc(){
+    public List<PostsListResponseDto> findAllDesc() {
         return postsRepository.findAllDesc().stream()
                 .map(PostsListResponseDto::new)
                 .collect(Collectors.toList());
