@@ -49,7 +49,6 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
-    // readOnly 시엔 아예 transactional 테그 안달기?
     @Transactional
     public List<PostsListResponseDto> findAllDesc() {
         return postsRepository.findAllDesc().stream()
